@@ -2,14 +2,11 @@ import axios from 'axios';
 import Input from '@/components/input';
 import { useCallback, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGit, FaGithub, FaGoogle } from 'react-icons/fa';
 
 const auth = () => {
-   const router = useRouter();
-
    const [email, setEmail] = useState('');
    const [name, setName] = useState('');
    const [password, setPassword] = useState('');
@@ -20,22 +17,19 @@ const auth = () => {
       setVariant((currentVariant) =>
          currentVariant === 'login' ? 'register' : 'login'
       );
-   }, [email, name, password]);
+   }, []);
 
    const login = useCallback(async () => {
       try {
          await signIn('credentials', {
             email,
             password,
-            redirect: false,
-            callbackUrl: '/',
+            callbackUrl: '/profiles',
          });
-
-         router.push('/profiles');
       } catch (error) {
          console.log(error);
       }
-   }, [email, password, router]);
+   }, [email, password]);
 
    const register = useCallback(async () => {
       try {
@@ -115,7 +109,7 @@ const auth = () => {
                         transition
                      '
                      >
-                        <FaGoogle size={30} />
+                        <FcGoogle size={30} />
                      </div>
 
                      <div
