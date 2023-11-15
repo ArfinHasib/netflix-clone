@@ -21,6 +21,7 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 const profiles = () => {
+   // eslint-disable-next-line
    const router = useRouter();
    // eslint-disable-next-line
    const { data: user } = useCurrentUser();
